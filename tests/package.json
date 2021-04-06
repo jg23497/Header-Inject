@@ -1,0 +1,31 @@
+{
+  "name": "header-inject-tests",
+  "version": "1.0.0",
+  "description": "Unit tests for Header Inject",
+  "main": "karma.conf.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "dependencies": {
+    "jasmine-core": "^3.7.1",
+    "karma": "^6.3.2",
+    "karma-coverage": "^2.0.3",
+    "karma-chrome-launcher": "^3.1.0",
+    "karma-jasmine": "^4.0.1",
+    "karma-verbose-reporter": "^0.0.6"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "karma start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jg23497/Header-Inject.git"
+  },
+  "author": "J. Gulan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jg23497/Header-Inject/issues"
+  },
+  "homepage": "https://github.com/jg23497/Header-Inject#readme"
+}

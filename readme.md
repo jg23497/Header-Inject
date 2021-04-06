@@ -7,13 +7,13 @@ A Chrome extension for injecting HTTP request headers. Simply.
 
 ## Test
 
-Header Inject relies on the Jasmine unit testing framework. Assuming Python 3 is installed, you can run the unit tests in your favourite browser:
+Header Inject relies on the [Jasmine](https://jasmine.github.io) unit testing framework. Assuming [Python 3](https://www.python.org) is installed, you can run the unit tests in your favourite browser:
 
 ```
 python run-tests-in-browser.py
 ``` 
 
-Or use the Karma test runner, assuming Node.js is installed:
+Or use the [Karma](https://karma-runner.github.io) test runner, assuming [Node.js](https://nodejs.org/en/) is installed:
 
 ```
 cd tests

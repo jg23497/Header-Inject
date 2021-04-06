@@ -1,0 +1,7 @@
+node_modules/
+tests/coverage/
+
+*.crx
+*.pem
+
+*.log

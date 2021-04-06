@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Options</title>
+    <link rel="stylesheet" href="css/bulma.min.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+
+<body class="app">
+
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="container">
+            <div class="navbar-brand">
+                <a class="navbar-item">
+                    <img src="../icons/logo.png" alt="Header Inject">
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="app-content">
+
+        <section class="section">
+            <div class="container">
+                <div class="content">
+
+                    <p class="subtitle is-5">HTTP Request Headers</p>
+
+                    <p>Add and override HTTP request headers</p>
+
+                    <div class="tags has-addons">
+                        <span class="tag is-large">Status</span>
+                        <span id="status-indicator" class="tag is-primary is-large">Unknown</span>
+                    </div>
+
+                    <ul id="httpHeaderOverrides">
+                    </ul>
+
+                    <div id="no-headers-defined-message" class="container is-hidden">
+                        <div class="notification">No request headers are configured.</div>
+                    </div>
+
+                    <table id="http-headers" class="table is-striped">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Value</th>
+                                <th>Enabled</th>
+                                <th>Controls</th>
+                            </tr>
+                        </thead>
+                        <tbody id="http-headers-table-body">
+                        </tbody>
+                    </table>
+                    <div class="level">
+                        <div class="level-left">
+                        </div>
+                        <div class="buttons level-right">
+                            <button id="add-header" class="button">Add</button>
+                            <button id="save-headers" class="button is-link" disabled>Save</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <footer class="footer">
+        <div class="content has-text-centered">
+
+            <p>
+                <strong>Header Inject</strong> by J. Gulan
+            </p>
+            <p>
+                <a class="button is-medium" href="https://www.paypal.com/donate/?hosted_button_id=76PH63DLM57TA"
+                    title="Support us" target="_blank">Donate &#127866;</a>
+            </p>
+        </div>
+    </footer>
+
+</body>
+
+<script type="module" src="../common/popup.js"></script>
+
+</html>

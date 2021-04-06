@@ -1,0 +1,93 @@
+.navbar {
+  min-width: 375px
+}
+
+.section {
+  padding: 1rem 1.5rem
+}
+
+.content table td {
+  vertical-align: middle
+}
+
+tr.strikethrough {
+  opacity: 35%
+}
+
+input[type=text] {
+  min-width: 150px
+}
+
+thead tr th {
+  font-weight: 400
+}
+
+.controls-cell {
+  min-width: 100px
+}
+
+.buttons.header-right {
+  margin-right: 0;
+  margin-left: auto;
+  padding-right: 10px
+}
+
+.button.is-primary {
+  background-color: #3367d6
+}
+
+.button.is-primary:hover {
+  background-color: #3367d6cf
+}
+
+.button {
+  border: 1px solid #dadce0
+}
+
+.button:hover {
+  background-color: #f8faff
+}
+
+button#save-headers {
+  transition: .5s
+}
+
+.navbar {
+  background-color: #3367d6
+}
+
+/* Options view */
+
+.app {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column
+}
+
+.app-content {
+  flex: 1
+}
+
+.footer {
+  padding-bottom: 2rem
+}
+
+.app-content .controls, .app-content .section {
+  margin-top: 2em
+}
+
+.app-content .buttons.level-right {
+  margin-top: 1.5rem
+}
+
+#status-indicator {
+  cursor: pointer
+}
+
+.app-content .content {
+  min-width: 540px
+}
+
+.app-content .content table#http-headers {
+  min-width: 565px
+}

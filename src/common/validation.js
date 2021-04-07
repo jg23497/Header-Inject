@@ -8,7 +8,7 @@ export default class Validation {
             throw "httpHeader cannot be null";
         }
 
-        var areHeaderValuesPresent = !(httpHeader.name && httpHeader.value);
+        var areHeaderValuesPresent = Boolean(httpHeader.name && httpHeader.value);
         var enabledValueIsBoolean = typeof httpHeader.enabled === "boolean";
         return areHeaderValuesPresent && enabledValueIsBoolean
     }

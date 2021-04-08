@@ -1,5 +1,7 @@
 # Header Inject
 
+[![Unit tests](https://github.com/jg23497/Header-Inject/actions/workflows/node.js.yml/badge.svg?branch=master)](https://github.com/jg23497/Header-Inject/actions/workflows/node.js.yml)
+
 A Chrome extension for injecting HTTP request headers. Simply.
 
 ![Header Inject in action](doc/images/header-configured.png)

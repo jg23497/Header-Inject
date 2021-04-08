@@ -6,7 +6,7 @@
 
 **An open-source Chrome extension for injecting or overriding HTTP request headers. Simply.**
 
-After installation, access Header Inject's quick options panel by clicking the extension's icon or open its options tab. The options view allows you to configure custom HTTP headers and to enable HTTP header injection, which is disabled by default when the extension is first installed. 
+After installation, access Header Inject's quick options panel by clicking the extension's icon or opening its options tab. The options view allows you to configure custom HTTP headers and to enable HTTP header injection, which is disabled by default when the extension is first installed. 
 
 Header Inject uses Chrome's synchronised storage mechanism, meaning its configuration is automatically synchronised to any Chrome browser you are logged in to.
 

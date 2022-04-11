@@ -147,7 +147,7 @@ describe("TableView", () => {
         }
 
         function getValueInputField(isValid) {
-            var httpHeaderOverride = { name: "", value: "", enabled: true };
+            var httpHeaderOverride = { label: "", name: "", value: "", enabled: true };
             document.getElementById = jasmine.createSpy("getElementByIdSpy")
                 .withArgs("http-headers-table-body").and.returnValue(tableBodyElement)
                 .withArgs("http-headers").and.returnValue(tableElement);
@@ -234,7 +234,7 @@ describe("TableView", () => {
         it("should clear validation error message when header value input validation succeeds", () => {
             // Arrange
             getValueInputField(true);
-            var valueInput = tableBodyElement.querySelectorAll("input")[1];
+            var valueInput = tableBodyElement.querySelectorAll("input")[2];
             valueInput.classList.add("is-danger");
             valueInput.setCustomValidity("Enter a value");
 

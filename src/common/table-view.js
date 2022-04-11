@@ -191,7 +191,7 @@ export default class TableView {
         var tableRow = this._getTableRow(event.currentTarget);
         tableRow.classList.remove(this._classes.strikethrough);
 
-        tableRow.children[3]
+        tableRow.children[4]
             .querySelector("button.delete-button")
             .classList
             .remove(this._classes.hidden);
@@ -207,7 +207,7 @@ export default class TableView {
             table.removeChild(tableRow);
         } else {
             tableRow.classList.add(this._classes.strikethrough);
-            tableRow.children[3]
+            tableRow.children[4]
                 .querySelector("button.undo")
                 .classList
                 .remove(this._classes.hidden);

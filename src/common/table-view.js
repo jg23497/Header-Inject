@@ -46,16 +46,18 @@ export default class TableView {
 
     _getHttpHeader = (row) => {
 
-        var headerNameElement = row.children[0].querySelector("input");
-        var headerValueElement = row.children[1].querySelector("input");
+        var labelElement = row.children[0].querySelector("input");
+        var headerNameElement = row.children[1].querySelector("input");
+        var headerValueElement = row.children[2].querySelector("input");
         var isHeaderNameValid = !(!headerNameElement.checkValidity() || !this._validation.isHttpHeaderNameValid(headerNameElement.value));
         var isHeaderValueValid = !(!headerValueElement.checkValidity() || !this._validation.isHttpHeaderValueValid(headerValueElement.value));
 
         return {
+            label: labelElement.value,
             name: headerNameElement.value,
             valid: isHeaderNameValid && isHeaderValueValid,
             value: headerValueElement.value,
-            enabled: row.children[2]
+            enabled: row.children[3]
                 .querySelector("input")
                 .checked
         };
@@ -67,8 +69,16 @@ export default class TableView {
         return !isTableHeader && !isDeleted;
     }
 
-    _addNameCell = (newRow, headerName) => {
+    _addLabelCell = (newRow, labelText) => {
         var cell = newRow.insertCell(0);
+        var div = this._createTextField("Label (optional)", labelText);
+        var inputElement = div.querySelector("input");
+        inputElement.addEventListener("input", this._toggleSaveButtonState);
+        cell.appendChild(div);
+    };
+
+    _addNameCell = (newRow, headerName) => {
+        var cell = newRow.insertCell(1);
         var div = this._createTextField("Name", headerName);
         var inputElement = div.querySelector("input");
         inputElement.addEventListener("input", this._validateHeaderName);
@@ -77,7 +87,7 @@ export default class TableView {
     }
 
     _addValueCell = (newRow, headerValue) => {
-        var cell = newRow.insertCell(1);
+        var cell = newRow.insertCell(2);
         var div = this._createTextField("Value", headerValue);
         var inputElement = div.querySelector("input");
         inputElement.addEventListener("input", this._validateHeaderValue);
@@ -104,7 +114,7 @@ export default class TableView {
     }
 
     _addEnableCell = (newRow, isEnabled) => {
-        var cell = newRow.insertCell(2);
+        var cell = newRow.insertCell(3);
         var checkbox = document.createElement("input");
         checkbox.type = "checkbox";
         checkbox.checked = isEnabled;
@@ -113,7 +123,7 @@ export default class TableView {
     }
 
     _addControlsCell = (newRow) => {
-        var cell = newRow.insertCell(3);
+        var cell = newRow.insertCell(4);
         var div = document.createElement("div");
         div.className = "buttons";
 
@@ -146,7 +156,7 @@ export default class TableView {
 
         var values = this.getValues();
         var oneOrMoreInvalid = values == null;
-
+        
         if (oneOrMoreInvalid) {
             this._optionsView.setSaveButtonStatus(false);
         } else {
@@ -228,6 +238,7 @@ export default class TableView {
             .bodyElement()
             .insertRow();
 
+        this._addLabelCell(row, httpHeader.label ?? "");
         this._addNameCell(row, httpHeader.name);
         this._addValueCell(row, httpHeader.value);
         this._addEnableCell(row, httpHeader.enabled);

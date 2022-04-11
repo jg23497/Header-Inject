@@ -112,7 +112,7 @@ describe("TableView", () => {
         testCases.forEach(test => {
             it(`should set save button enabled status to ${test.expectedSaveButtonStatus} when header validity is ${test.headersValid}`, () => {
                 // Arrange
-                var httpHeaderOverride = { name: "foo1", value: "bar1", enabled: true, valid: true };
+                var httpHeaderOverride = { label: "", name: "foo1", value: "bar1", enabled: true, valid: true };
 
                 document.getElementById = jasmine.createSpy("getElementByIdSpy")
                     .withArgs("http-headers").and.returnValue(tableElement)
@@ -138,7 +138,7 @@ describe("TableView", () => {
         });
 
         function getNameInputField(isValid) {
-            var httpHeaderOverride = { name: "", value: "", enabled: true };
+            var httpHeaderOverride = { label: "", name: "", value: "", enabled: true };
             document.getElementById = jasmine.createSpy("getElementByIdSpy")
                 .withArgs("http-headers-table-body").and.returnValue(tableBodyElement)
                 .withArgs("http-headers").and.returnValue(tableElement);
@@ -147,7 +147,7 @@ describe("TableView", () => {
         }
 
         function getValueInputField(isValid) {
-            var httpHeaderOverride = { name: "", value: "", enabled: true };
+            var httpHeaderOverride = { label: "", name: "", value: "", enabled: true };
             document.getElementById = jasmine.createSpy("getElementByIdSpy")
                 .withArgs("http-headers-table-body").and.returnValue(tableBodyElement)
                 .withArgs("http-headers").and.returnValue(tableElement);
@@ -158,7 +158,7 @@ describe("TableView", () => {
         it("should add a row to the table", () => {
 
             // Arrange
-            var httpHeaderOverride = { name: "foo", value: "bar", enabled: true };
+            var httpHeaderOverride = { label: "", name: "foo", value: "bar", enabled: true };
             document.getElementById = jasmine.createSpy("getElementByIdSpy")
                 .withArgs("http-headers-table-body").and.returnValue(tableBodyElement);
 
@@ -169,17 +169,18 @@ describe("TableView", () => {
             var tableRows = tableBodyElement.querySelectorAll("tr");
             var rowCells = tableRows[0].querySelectorAll("td");
             expect(tableRows.length).toBe(1);
-            expect(rowCells.length).toBe(4);
-            expect(rowCells[0].innerHTML).toEqual('<div class="field"><div class="control"><input class="input" type="text" placeholder="Name"></div></div>');
-            expect(rowCells[1].innerHTML).toEqual('<div class="field"><div class="control"><input class="input" type="text" placeholder="Value"></div></div>');
-            expect(rowCells[2].innerHTML).toEqual('<input type="checkbox">');
-            expect(rowCells[3].innerHTML).toEqual('<div class="buttons"><button class="delete-button button is-danger is-light is-small">Delete</button><button class="undo button is-hidden is-small">Undo</button></div>');
+            expect(rowCells.length).toBe(5);
+            expect(rowCells[0].innerHTML).toEqual('<div class="field"><div class="control"><input class="input" type="text" placeholder="Label (optional)"></div></div>');
+            expect(rowCells[1].innerHTML).toEqual('<div class="field"><div class="control"><input class="input" type="text" placeholder="Name"></div></div>');
+            expect(rowCells[2].innerHTML).toEqual('<div class="field"><div class="control"><input class="input" type="text" placeholder="Value"></div></div>');
+            expect(rowCells[3].innerHTML).toEqual('<input type="checkbox">');
+            expect(rowCells[4].innerHTML).toEqual('<div class="buttons"><button class="delete-button button is-danger is-light is-small">Delete</button><button class="undo button is-hidden is-small">Undo</button></div>');
         });
 
         it("should render validation error message when header name input validation fails", () => {
             // Arrange
             getNameInputField(false);
-            var nameInput = tableBodyElement.querySelectorAll("input")[0];
+            var nameInput = tableBodyElement.querySelectorAll("input")[1];
 
             // Assume
             expect(nameInput.classList).not.toContain("is-danger");
@@ -198,7 +199,7 @@ describe("TableView", () => {
         it("should clear validation error message when header name input validation succeeds", () => {
             // Arrange
             getNameInputField(true);
-            var nameInput = tableBodyElement.querySelectorAll("input")[0];
+            var nameInput = tableBodyElement.querySelectorAll("input")[1];
             nameInput.classList.add("is-danger");
             nameInput.setCustomValidity("Enter a valid HTTP header name");
 
@@ -214,7 +215,7 @@ describe("TableView", () => {
         it("should render validation error message when header value input validation fails", () => {
             // Arrange
             getValueInputField(false);
-            var valueInput = tableBodyElement.querySelectorAll("input")[1];
+            var valueInput = tableBodyElement.querySelectorAll("input")[2];
 
             // Assume
             expect(valueInput.classList).not.toContain("is-danger");
@@ -233,7 +234,7 @@ describe("TableView", () => {
         it("should clear validation error message when header value input validation succeeds", () => {
             // Arrange
             getValueInputField(true);
-            var valueInput = tableBodyElement.querySelectorAll("input")[1];
+            var valueInput = tableBodyElement.querySelectorAll("input")[2];
             valueInput.classList.add("is-danger");
             valueInput.setCustomValidity("Enter a value");
 
@@ -257,7 +258,7 @@ describe("TableView", () => {
         it("should return null when an invalid header is found", () => {
 
             // Arrange
-            var httpHeaderOverride = { name: "foo1", value: "bar1", enabled: true, valid: true };
+            var httpHeaderOverride = { label: "", name: "foo1", value: "bar1", enabled: true, valid: true };
 
             document.getElementById = jasmine.createSpy("getElementByIdSpy")
                 .withArgs("http-headers").and.returnValue(tableElement)
@@ -290,8 +291,8 @@ describe("TableView", () => {
         it("should return HTTP header rows when rows are defined", () => {
 
             // Arrange
-            var httpHeaderOverride1 = { name: "foo1", value: "bar1", enabled: true, valid: true };
-            var httpHeaderOverride2 = { name: "foo2", value: "bar2", enabled: false, valid: true };
+            var httpHeaderOverride1 = { label: "", name: "foo1", value: "bar1", enabled: true, valid: true };
+            var httpHeaderOverride2 = { label: "my-label", name: "foo2", value: "bar2", enabled: false, valid: true };
             document.getElementById = jasmine.createSpy("getElementByIdSpy")
                 .withArgs("http-headers").and.returnValue(tableElement)
                 .withArgs("http-headers-table-body").and.returnValue(tableBodyElement);
@@ -311,7 +312,7 @@ describe("TableView", () => {
         it("should not return rows containing <th> elements", () => {
 
             // Arrange
-            var httpHeaderOverride = { name: "foo", value: "bar", enabled: true, valid: true };
+            var httpHeaderOverride = { label: "", name: "foo", value: "bar", enabled: true, valid: true };
             document.getElementById = jasmine.createSpy("getElementByIdSpy")
                 .withArgs("http-headers").and.returnValue(tableElement)
                 .withArgs("http-headers-table-body").and.returnValue(tableBodyElement);
@@ -331,7 +332,7 @@ describe("TableView", () => {
         it("should not return rows with the 'strikethrough' class", () => {
 
             // Arrange
-            var httpHeaderOverride = { name: "foo", value: "bar", enabled: true };
+            var httpHeaderOverride = { label: "", name: "foo", value: "bar", enabled: true };
             document.getElementById = jasmine.createSpy("getElementByIdSpy")
                 .withArgs("http-headers").and.returnValue(tableElement)
                 .withArgs("http-headers-table-body").and.returnValue(tableBodyElement);
@@ -355,8 +356,8 @@ describe("TableView", () => {
         var httpHeaderOverride2;
 
         beforeEach(() => {
-            httpHeaderOverride1 = { name: "foo1", value: "bar1", enabled: true };
-            httpHeaderOverride2 = { name: "foo2", value: "bar2", enabled: false };
+            httpHeaderOverride1 = { label: "", name: "foo1", value: "bar1", enabled: true };
+            httpHeaderOverride2 = { label: "", name: "foo2", value: "bar2", enabled: false };
 
             document.getElementById = jasmine.createSpy("getElementByIdSpy")
                 .withArgs("http-headers").and.returnValue(tableElement)
@@ -422,8 +423,8 @@ describe("TableView", () => {
         var undoButton;
 
         beforeEach(() => {
-            var httpHeaderOverride1 = { name: "foo1", value: "bar1", enabled: true };
-            var httpHeaderOverride2 = { name: "foo2", value: "bar2", enabled: false };
+            var httpHeaderOverride1 = { label: "", name: "foo1", value: "bar1", enabled: true };
+            var httpHeaderOverride2 = { label: "", name: "foo2", value: "bar2", enabled: false };
 
             document.getElementById = jasmine.createSpy("getElementByIdSpy")
                 .withArgs("http-headers").and.returnValue(tableElement)

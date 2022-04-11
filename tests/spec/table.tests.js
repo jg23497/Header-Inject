@@ -45,9 +45,9 @@ describe("Table", () => {
         }
 
         httpHeaders = [
-            { name: "a", value: "b", enabled: true },
-            { name: "b", value: "c", enabled: true },
-            { name: "c", value: "d", enabled: false }
+            { label: "", name: "a", value: "b", enabled: true },
+            { label: "my-label", name: "b", value: "c", enabled: true },
+            { label: "another-label", name: "c", value: "d", enabled: false }
         ];
 
     });
@@ -105,9 +105,9 @@ describe("Table", () => {
             let { validationMock, tableViewMock, table } = getTable();
             tableViewMock.getValues.and.returnValue(httpHeaders);
             validationMock.isHttpHeaderValid
-                .withArgs({ name: "a", value: "b", enabled: true }).and.returnValue(false)
-                .withArgs({ name: "b", value: "c", enabled: true }).and.returnValue(true)
-                .withArgs({ name: "c", value: "d", enabled: false }).and.returnValue(true);
+                .withArgs({ label: "", name: "a", value: "b", enabled: true }).and.returnValue(false)
+                .withArgs({ label: "my-label", name: "b", value: "c", enabled: true }).and.returnValue(true)
+                .withArgs({ label: "another-label", name: "c", value: "d", enabled: false }).and.returnValue(true);
 
             // Act
             var values = table.getValues();
@@ -143,10 +143,10 @@ describe("Table", () => {
             let { _, tableViewMock, table } = getTable();
 
             // Act
-            table.addNewHeader({ name: "a", value: "b", enabled: true });
+            table.addNewHeader({ label: "", name: "a", value: "b", enabled: true });
 
             // Assert
-            expect(tableViewMock.addRow).toHaveBeenCalledWith({ name: "a", value: "b", enabled: true });
+            expect(tableViewMock.addRow).toHaveBeenCalledWith({ label: "", name: "a", value: "b", enabled: true });
         });
 
     });
